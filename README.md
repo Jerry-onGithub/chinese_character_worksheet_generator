@@ -1,0 +1,2 @@
+# chinese_character_worksheet_generator
+Chinese character worksheet generator automation using Python
