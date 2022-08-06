@@ -21,23 +21,24 @@ from webdriver_manager.firefox import GeckoDriverManager
 link = 'https://www.purpleculture.net/chinese-practice-sheet/'
 
 lesson = []
-with open(r'C:/Users/Jerry/Desktop/quizlet.csv' ) as h:
+with open(r'C:/Users/.../Desktop/quizlet.csv' ) as h:   #change path to your local path where the file containing all chinese words and characters is located
     reader_obj = csv.reader(h, delimiter=',')
     rows = list(reader_obj)
 
     for i in range(len(rows)):
         try:
             if i>0:
+                #add all characters/words in lesson
                 lesson.append(rows[i][1])
         except:
             lesson.append("")
-       
+      
 print(len(lesson))
 print(len(rows))  
 
 chrome_options = Options()
-chrome_options.add_argument("--user-data-dir=C:/Users/Jerry/AppData/Local/Google/Chrome/User Data/Profile 1") # change to profile path
-driver = webdriver.Chrome(executable_path="C:/Users/Jerry/Downloads/chromedriver_win32 (4)/chromedriver.exe", chrome_options=chrome_options)
+chrome_options.add_argument("--user-data-dir=C:/Users/.../AppData/Local/Google/Chrome/User Data/Profile 1")   #change to profile path
+driver = webdriver.Chrome(executable_path="C:/Users/.../Downloads/chromedriver_win32 (4)/chromedriver.exe", chrome_options=chrome_options)   #change to chromedriver path(version should be same with your browser version)
 
 driver.get(link)
 time.sleep(3)
@@ -48,9 +49,9 @@ time.sleep(3)
 username = driver.find_element_by_id("login-email-address")
 password = driver.find_element_by_id("login-password")
 
-username.send_keys("jerrymeketa@gmail.com")
+username.send_keys("...@gmail.com") #your account login email
 time.sleep(1)
-password.send_keys("eyerusalemm23")
+password.send_keys("...")   #account login password
 
 login = driver.find_element_by_xpath("(//button[contains(@name, 'signin')])") 
 login.click() 
@@ -59,7 +60,8 @@ time.sleep(5)
 
 check=[]
 items=[]
-count=20
+count=20    #mine starts from lesson 20, you can adjust this to 1 or whatever you like
+#for each character/word in lesson
 for l in lesson:
     if count>0:
         title = "lesson " + str(count)
@@ -81,6 +83,7 @@ for l in lesson:
             input2.send_keys(listToStr)
             time.sleep(1)
             
+            #you can adjust these according to your preferences
             style = Select(driver.find_element_by_id('grid_style'))
             style.select_by_index(5)
             size = Select(driver.find_element_by_id('grid_size'))
